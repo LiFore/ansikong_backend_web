@@ -3,7 +3,9 @@ import Adapter from 'axios-mock-adapter'
 import { get } from 'lodash'
 import util from '@/libs/util'
 import { errorLog, errorCreate } from './tools'
+import Qs from 'qs'
 
+const Base64 = require('js-base64').Base64
 /**
  * @description 创建请求实例
  */
@@ -32,13 +34,14 @@ function createService () {
         return dataAxios
       } else {
         // 有 code 代表这是一个后端接口 可以进行进一步的判断
+        console.log(code)
         switch (code) {
-          case 0:
+          case 200:
             // [ 示例 ] code === 0 代表没有错误
             return dataAxios.data
-          case 'xxx':
+          case 400:
             // [ 示例 ] 其它和后台约定的 code
-            errorCreate(`[ code: xxx ] ${dataAxios.msg}: ${response.config.url}`)
+            errorCreate(`[ code: 400 ] ${dataAxios.error}`)
             break
           default:
             // 不是正确的 code
@@ -77,13 +80,17 @@ function createService () {
 function createRequestFunction (service) {
   return function (config) {
     const token = util.cookies.get('token')
+    const uuid = util.cookies.get('uuid')
     const configDefault = {
       headers: {
-        Authorization: token,
-        'Content-Type': get(config, 'headers.Content-Type', 'application/json')
+        Authorization: 'Basic ' + Base64.encode(uuid + ':' + token),
+        'Content-Type': 'application/x-www-form-urlencoded' // get(config, 'headers.Content-Type', 'application/json')
       },
       timeout: 5000,
       baseURL: process.env.VUE_APP_API,
+      paramsSerializer: function (params) {
+        return Qs.stringify(params, { arrayFormat: 'indices' })
+      },
       data: {}
     }
     return service(Object.assign(configDefault, config))

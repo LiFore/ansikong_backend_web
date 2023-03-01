@@ -9,10 +9,14 @@
         <router-link
           to="/index"
           :class="{'logo-group': true, 'logo-transition': asideTransition}"
-          :style="{width: asideCollapse ? asideWidthCollapse : asideWidth}"
+          :style="{width: asideCollapse ? asideWidthCollapse : asideWidth,'position':'relative'}"
           flex-box="0">
+          <span v-if="asideCollapse" style="position: absolute;top:50%;left:50%;transform: translate(-50%,-50%);font-weight: 600;color:#2f74ff">ASK</span>
+          <span v-else style="position: absolute;top:50%;left:50%;transform: translate(-50%,-50%);font-weight: 600;color:#2f74ff;width:fit-content">安心康<br>综合管理平台</span>
+          <!--
           <img v-if="asideCollapse" :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/icon-only.png`">
           <img v-else :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/all.png`">
+          -->
         </router-link>
         <div class="toggle-aside-btn" @click="handleToggleAside" flex-box="0">
           <d2-icon name="bars"/>
@@ -22,9 +26,9 @@
         <div class="d2-header-right" flex-box="0">
           <!-- 如果你只想在开发环境显示这个按钮请添加 v-if="$env === 'development'" -->
           <d2-header-search @click="handleSearchClick"/>
-          <d2-header-log/>
+          <d2-header-log v-if="$env === 'development'" />
           <d2-header-fullscreen/>
-          <d2-header-theme/>
+          <d2-header-theme v-if="$env === 'development'"/>
           <d2-header-size/>
           <d2-header-locales/>
           <d2-header-color/>

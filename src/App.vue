@@ -24,5 +24,9 @@ export default {
 </script>
 
 <style lang="scss">
+.el-card{
+  border-radius: 10px !important;
+}
+
 @import '~@/assets/style/public-class.scss';
 </style>
