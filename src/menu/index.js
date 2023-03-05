@@ -17,8 +17,8 @@ function supplementPath (menu) {
 
 export const menuHeader = supplementPath([
   { path: '/index', title: '系统首页', icon: 'home' },
-  { path: '/', title: '投诉列表', icon: 'comments' },
-  { path: '/', title: '数据看板', icon: 'database' }
+  { path: '/orders/complains', title: '投诉列表', icon: 'comments' },
+  { path: '/statistics/index', title: '数据看板', icon: 'database' }
 ])
 
 export const menuAside = supplementPath([
@@ -27,8 +27,8 @@ export const menuAside = supplementPath([
     icon: 'tachometer',
     children: [
       { path: '/index', title: '系统首页' },
-      { path: '/+', title: '投诉列表' },
-      { path: '/', title: '数据看板' }
+      { path: '/orders/complains', title: '投诉列表' },
+      { path: '/statistics/index', title: '数据看板' }
     ]
   },
   {
@@ -53,27 +53,33 @@ export const menuAside = supplementPath([
     title: '服务管理',
     icon: 'user-md',
     children: [
-      { path: '/index', title: '服务商列表' },
-      { path: '/', title: '服务管理' }
+      { path: '/services/providers/list', title: '服务商列表' },
+      { path: '/services/list', title: '服务管理' }
     ]
   },
   {
     title: '财务管理',
     icon: 'dollar',
     children: [
-      { path: '/index', title: '回款管理' },
-      { path: '/', title: '收入统计' },
-      { path: '/', title: '费用管理' }
+      { path: '/finance/collection', title: '回款管理' },
+      { path: '/finance/income', title: '收入统计' },
+      { path: '/finance/total', title: '费用管理' }
     ]
   },
   {
     title: '统计分析',
     icon: 'tachometer',
     children: [
-      { path: '/index', title: '用户分析' },
-      { path: '/', title: '服务商分析' },
-      { path: '/', title: '财务分析' }
+      { path: '/statistics/clients', title: '用户分析' },
+      { path: '/statistics/service_providers', title: '服务商分析' },
+      { path: '/statistics/finance', title: '财务分析' }
     ]
   },
-  { path: '/index', title: '系统设置', icon: 'home' }
+  {
+    title: '系统设置',
+    icon: 'home',
+    children: [
+      { path: '/settings/tags', title: '长者标签' }
+    ]
+  }
 ])

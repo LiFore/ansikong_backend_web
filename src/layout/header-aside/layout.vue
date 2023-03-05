@@ -28,10 +28,10 @@
           <d2-header-search @click="handleSearchClick"/>
           <d2-header-log v-if="$env === 'development'" />
           <d2-header-fullscreen/>
-          <d2-header-theme v-if="$env === 'development'"/>
-          <d2-header-size/>
+          <!--<d2-header-theme v-if="$env === 'development'"/>
+           <d2-header-size/>
           <d2-header-locales/>
-          <d2-header-color/>
+          <d2-header-color/>-->
           <d2-header-user/>
         </div>
       </div>

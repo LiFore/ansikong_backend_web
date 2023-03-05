@@ -26,6 +26,11 @@ export default {
 <style lang="scss">
 .el-card{
   border-radius: 10px !important;
+  margin: 10px 0px;
+}
+
+.search-form-customized .el-form-item{
+  margin-bottom: 0px !important;
 }
 
 @import '~@/assets/style/public-class.scss';

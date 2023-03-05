@@ -40,6 +40,24 @@ const frameIn = [
         },
         component: _import('clients/list/index')
       },
+      {
+        path: '/clients/profile',
+        name: 'clients profile',
+        meta: {
+          auth: true,
+          title: '长者资料'
+        },
+        component: _import('clients/profile/index')
+      },
+      {
+        path: '/settings/tags',
+        name: 'settings tags',
+        meta: {
+          auth: true,
+          title: '长者标签'
+        },
+        component: _import('settings/tags/index')
+      },
       // 系统 前端日志
       {
         path: 'log',

@@ -200,7 +200,8 @@ export default {
         if (valid) {
           // 登录
           // 注意 这里的演示没有传验证码
-          // 具体需要传递的数据请自行修改代码
+          // 具体需要传递的数据请自行修改代
+          const loading = this.$loading()
           this.login({
             username: this.formLogin.username,
             password: this.formLogin.password
@@ -209,6 +210,7 @@ export default {
               // 重定向对象不存在则返回顶层路径
               this.$router.replace(this.$route.query.redirect || '/')
             })
+          loading.close()
         } else {
           // 登录表单校验失败
           this.$message.error('表单校验失败，请检查')

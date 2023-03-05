@@ -53,17 +53,17 @@ function createService () {
     error => {
       const status = get(error, 'response.status')
       switch (status) {
-        case 400: error.message = '请求错误'; break
-        case 401: error.message = '未授权，请登录'; break
-        case 403: error.message = '拒绝访问'; break
-        case 404: error.message = `请求地址出错: ${error.response.config.url}`; break
-        case 408: error.message = '请求超时'; break
-        case 500: error.message = '服务器内部错误'; break
-        case 501: error.message = '服务未实现'; break
-        case 502: error.message = '网关错误'; break
-        case 503: error.message = '服务不可用'; break
-        case 504: error.message = '网关超时'; break
-        case 505: error.message = 'HTTP版本不受支持'; break
+        case 400: error.resp_msg = `请求错误 ${error.response.data.error}`; break
+        case 401: error.resp_msg = '未授权，请登录'; break
+        case 403: error.resp_msg = '拒绝访问'; break
+        case 404: error.resp_msg = `请求地址出错: ${error.response.config.url}`; break
+        case 408: error.resp_msg = '请求超时'; break
+        case 500: error.resp_msg = '服务器内部错误'; break
+        case 501: error.resp_msg = '服务未实现'; break
+        case 502: error.resp_msg = '网关错误'; break
+        case 503: error.resp_msg = '服务不可用'; break
+        case 504: error.resp_msg = '网关超时'; break
+        case 505: error.resp_msg = 'HTTP版本不受支持'; break
         default: break
       }
       errorLog(error)
@@ -84,14 +84,14 @@ function createRequestFunction (service) {
     const configDefault = {
       headers: {
         Authorization: 'Basic ' + Base64.encode(uuid + ':' + token),
-        'Content-Type': 'application/x-www-form-urlencoded' // get(config, 'headers.Content-Type', 'application/json')
       },
       timeout: 5000,
       baseURL: process.env.VUE_APP_API,
       paramsSerializer: function (params) {
         return Qs.stringify(params, { arrayFormat: 'indices' })
       },
-      data: {}
+      data: {},
+      param: {}
     }
     return service(Object.assign(configDefault, config))
   }

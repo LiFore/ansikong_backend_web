@@ -1,4 +1,4 @@
-import { Message } from 'element-ui'
+import { Notification } from 'element-ui'
 import store from '@/store'
 import util from '@/libs/util'
 
@@ -68,8 +68,8 @@ export function errorLog (error) {
     console.log(error)
   }
   // 显示提示
-  Message({
-    message: error.message,
+  Notification({
+    message: error.message + error.resp_msg,
     type: 'error',
     duration: 5 * 1000
   })
